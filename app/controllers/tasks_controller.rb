@@ -12,7 +12,7 @@ class TasksController < ApplicationController
 		if @task.valid?
 			redirect_to root_path
 		else
-			return render :edit, status: :unprocessable_entity
+			return render :new, status: :unprocessable_entity
 		end
 	end
 
