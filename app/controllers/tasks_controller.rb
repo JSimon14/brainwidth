@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-	before_action :authenticate_user!, only: [:new, :create, :show, :edit]
+	before_action :authenticate_user!, only: [:new, :create, :show, :edit, :update, :destroy]
 
 	def index
 
@@ -21,16 +21,20 @@ class TasksController < ApplicationController
 	def show
 		@task = Task.find_by_id(params[:id])
 		return render_not_found if @task.blank?
+		return render_forbidden if @task.user != current_user
 	end
 
 	def edit
 		@task = Task.find_by_id(params[:id])
 		return render_not_found if @task.blank?
+		return render_forbidden if @task.user != current_user
+
 	end
 
 	def update
 		@task = Task.find_by_id(params[:id])
 		return render_not_found if @task.blank?
+		return render_forbidden if @task.user != current_user
 
 		@task.update_attributes(task_params)
 		if @task.valid?
@@ -43,6 +47,7 @@ class TasksController < ApplicationController
 	def destroy
 		@task = Task.find_by_id(params[:id])
 		return render_not_found if @task.blank?
+		return render_forbidden if @task.user != current_user
 		@task.destroy
 		redirect_to root_path
 	end

@@ -54,6 +54,15 @@ RSpec.describe TasksController, type: :controller do
 	end
 
 	describe "tasks#show action" do
+
+		it "shouldn't allow a user who didn't make the task to see the task" do
+			p = FactoryGirl.create(:task)
+			user = FactoryGirl.create(:user)
+  			sign_in user
+  			get :show, id: p.id
+  			expect(response).to have_http_status(:forbidden)
+		end
+
 		it "should require user to be logged in" do
       		task = FactoryGirl.create(:task)
       		get :show, id: task.id
@@ -61,10 +70,9 @@ RSpec.describe TasksController, type: :controller do
     	end
 
 	    it "should successfully show the page if the task is found" do
-	        user = FactoryGirl.create(:user)
-			sign_in user
-
 	        task = FactoryGirl.create(:task)
+	        sign_in task.user
+	        
   		    get :show, id: task.id
   		    expect(response).to have_http_status(:success)
 	    end
@@ -79,6 +87,15 @@ RSpec.describe TasksController, type: :controller do
 	end
 
 	describe "tasks#edit" do
+		it "shouldn't allow a user who didn't make the task to edit the task" do
+			p = FactoryGirl.create(:task)
+			user = FactoryGirl.create(:user)
+  			sign_in user
+  			get :edit, id: p.id
+  			expect(response).to have_http_status(:forbidden)
+		end
+
+
 		it "should require user to be logged in" do
       		task = FactoryGirl.create(:task)
       		get :edit, id: task.id
@@ -103,8 +120,24 @@ RSpec.describe TasksController, type: :controller do
 	end 
 
 	describe "tasks#update" do
+
+		it "shouldn't allow a user who didn't make the task to update the task" do
+			p = FactoryGirl.create(:task, title: "Initial Value")
+			user = FactoryGirl.create(:user)
+  			sign_in user
+  			patch :update, id: p.id, task: {title: "New Value"}
+  			expect(response).to have_http_status(:forbidden)
+		end
+
+		it "should require user to be logged in" do
+	      	p = FactoryGirl.create(:task, title: "Initial Value")
+	        patch :update, id: p.id, task: {title: "New Value"}
+	      	expect(response).to redirect_to new_user_session_path
+	    end
+
 	    it "should allow users to successfully update tasks" do
 	        p = FactoryGirl.create(:task, title: "Initial Value")
+	        sign_in p.user
 	        patch :update, id: p.id, task: {title: "New Value"}
 	        expect(response).to redirect_to root_path
 	        p.reload
@@ -112,12 +145,16 @@ RSpec.describe TasksController, type: :controller do
 	    end
 
 	    it "should have http 404 error if the task cannot be found" do
+			user = FactoryGirl.create(:user)
+			sign_in user
+
 			patch :update, id:"whatever", task: {title: "New Title"}
 			expect(response).to have_http_status(:not_found)
 	    end
 
 	    it "should render the edit form with an http status of unprocessable_entity" do
 	    	p = FactoryGirl.create(:task, title: "Initial Value")
+	    	sign_in p.user
 	    	patch :update, id: p.id, task: {title: ''}
 
 	    	expect(response).to have_http_status(:unprocessable_entity)
@@ -127,8 +164,25 @@ RSpec.describe TasksController, type: :controller do
     end
 
     describe "tasks#destroy" do
+
+    	it "shouldn't allow a user who didn't make the task to destroy the task" do
+    		p = FactoryGirl.create(:task)
+			user = FactoryGirl.create(:user)
+  			sign_in user
+  			delete :destroy, id: p.id
+  			expect(response).to have_http_status(:forbidden)
+		end
+
+
+    	it "should require user to be logged in" do
+	      	p = FactoryGirl.create(:task)
+	      	delete :destroy, id: p.id
+	      	expect(response).to redirect_to new_user_session_path
+	    end
+
     	it "should allow a user to destroy tasks" do
     		p = FactoryGirl.create(:task)
+    		sign_in p.user
     		delete :destroy, id: p.id
 
     		expect(response).to redirect_to root_path
@@ -137,6 +191,9 @@ RSpec.describe TasksController, type: :controller do
     	end
 
     	it "should return a 404 message if we cannot find the task with the specified id" do 
+    		user = FactoryGirl.create(:user)
+			sign_in user
+
     		delete :destroy, id: 'whatever'
     		expect(response).to have_http_status(:not_found)
     	end 
