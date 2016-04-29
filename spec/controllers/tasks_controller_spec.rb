@@ -15,11 +15,7 @@ RSpec.describe TasksController, type: :controller do
 		end
 
 		it "should successfully show the new form" do
-			user = User.create(
-				email: 'fakeemail@yahoo.com',
-				password: 'fakepassword',
-				password_confirmation: 'fakepassword'
-				)
+			user = FactoryGirl.create(:user)
 			sign_in user
 
 			get :new
@@ -35,11 +31,7 @@ RSpec.describe TasksController, type: :controller do
 
 
 		it "should successfully create a new task in the database" do
-			user = User.create(
-				email: 'fakeemail@yahoo.com',
-				password: 'fakepassword',
-				password_confirmation: 'fakepassword'
-				)
+			user = FactoryGirl.create(:user)
 			sign_in user
 
 			post :create, task: {title: 'Hello!', date: 'April 27 2016', value: '2', category: 'work'}
@@ -51,11 +43,7 @@ RSpec.describe TasksController, type: :controller do
 		end
 
 		it "should properly deal with validation errors" do
-			user = User.create(
-				email: 'fakeemail@yahoo.com',
-				password: 'fakepassword',
-				password_confirmation: 'fakepassword'
-				)
+			user = FactoryGirl.create(:user)
 			sign_in user
 
 			task_count = Task.count
