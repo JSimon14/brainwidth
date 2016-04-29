@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-	before_action :authenticate_user!, only: [:new, :create]
+	before_action :authenticate_user!, only: [:new, :create, :show]
 
 	def index
 
@@ -18,7 +18,10 @@ class TasksController < ApplicationController
 		end
 	end
 
-
+	def show
+		@task = Task.find_by_id(params[:id])
+		return render_not_found if @task.blank?
+	end
 
 
 

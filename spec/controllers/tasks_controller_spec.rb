@@ -53,4 +53,30 @@ RSpec.describe TasksController, type: :controller do
 		end
 	end
 
+	describe "tasks#show action" do
+		it "should require user to be logged in" do
+      		task = FactoryGirl.create(:task)
+      		get :show, id: task.id
+      		expect(response).to redirect_to new_user_session_path
+    	end
+
+	    it "should successfully show the page if the task is found" do
+	        user = FactoryGirl.create(:user)
+			sign_in user
+
+	        task = FactoryGirl.create(:task)
+  		    get :show, id: task.id
+  		    expect(response).to have_http_status(:success)
+	    end
+	    
+	    it "should return a 404 error if the task is not found" do
+	        user = FactoryGirl.create(:user)
+			sign_in user
+
+	        get :show, id: 'nopenope'
+    		expect(response).to have_http_status(:not_found)
+	    end
+
+  end
+
 end
