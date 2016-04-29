@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+	before_action :authenticate_user!, only: [:new, :create]
+
 	def index
 
 	end
@@ -8,7 +10,7 @@ class TasksController < ApplicationController
 	end
 
 	def create
-		@task = Task.create(task_params)
+		@task = current_user.tasks.create(task_params)
 		if @task.valid?
 			redirect_to root_path
 		else
