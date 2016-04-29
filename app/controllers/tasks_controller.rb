@@ -28,7 +28,6 @@ class TasksController < ApplicationController
 		@task = Task.find_by_id(params[:id])
 		return render_not_found if @task.blank?
 		return render_forbidden if @task.user != current_user
-
 	end
 
 	def update

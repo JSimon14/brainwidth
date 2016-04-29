@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :category do
     name 'school'
+    association :user
   end
 
   factory :user do
@@ -17,6 +18,7 @@ FactoryGirl.define do
     date 'April 27 2016' 
     value '2' 
     association :user
+    association :category
   end
 
 
