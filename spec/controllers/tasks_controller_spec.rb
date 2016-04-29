@@ -126,6 +126,22 @@ RSpec.describe TasksController, type: :controller do
 	    end
     end
 
+    describe "tasks#destroy" do
+    	it "should allow a user to destroy tasks" do
+    		p = FactoryGirl.create(:task)
+    		delete :destroy, id: p.id
+
+    		expect(response).to redirect_to root_path
+    		p = Task.find_by_id(p.id)
+    		expect(p).to eq nil
+    	end
+
+    	it "should return a 404 message if we cannot find the task with the specified id" do 
+    		delete :destroy, id: 'whatever'
+    		expect(response).to have_http_status(:not_found)
+    	end 
+    end
+
 end
 
 

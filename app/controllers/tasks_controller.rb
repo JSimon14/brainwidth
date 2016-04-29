@@ -40,6 +40,13 @@ class TasksController < ApplicationController
 		end
 	end
 
+	def destroy
+		@task = Task.find_by_id(params[:id])
+		return render_not_found if @task.blank?
+		@task.destroy
+		redirect_to root_path
+	end
+
 
 
 	private
