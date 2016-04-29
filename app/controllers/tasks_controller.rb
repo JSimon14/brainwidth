@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-	before_action :authenticate_user!, only: [:new, :create, :show]
+	before_action :authenticate_user!, only: [:new, :create, :show, :edit]
 
 	def index
 
@@ -21,6 +21,23 @@ class TasksController < ApplicationController
 	def show
 		@task = Task.find_by_id(params[:id])
 		return render_not_found if @task.blank?
+	end
+
+	def edit
+		@task = Task.find_by_id(params[:id])
+		return render_not_found if @task.blank?
+	end
+
+	def update
+		@task = Task.find_by_id(params[:id])
+		return render_not_found if @task.blank?
+
+		@task.update_attributes(task_params)
+		if @task.valid?
+			redirect_to root_path
+		else
+			return render :edit, status: :unprocessable_entity
+		end
 	end
 
 

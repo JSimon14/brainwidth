@@ -76,7 +76,62 @@ RSpec.describe TasksController, type: :controller do
 	        get :show, id: 'nopenope'
     		expect(response).to have_http_status(:not_found)
 	    end
+	end
 
-  end
+	describe "tasks#edit" do
+		it "should require user to be logged in" do
+      		task = FactoryGirl.create(:task)
+      		get :edit, id: task.id
+      		expect(response).to redirect_to new_user_session_path
+    	end
+
+    	it "should successfully show the edit form if the gram is found" do 
+			task = FactoryGirl.create(:task)
+			sign_in task.user
+
+			get :edit, id: task.id
+      		expect(response).to have_http_status(:success)
+    	end
+
+    	it "should show a 404 error message if the gram is not found" do
+			task = FactoryGirl.create(:task)
+			sign_in task.user
+
+			get :edit, id: "whatever"
+      		expect(response).to have_http_status(:not_found)
+    	end
+	end 
+
+	describe "tasks#update" do
+	    it "should allow users to successfully update tasks" do
+	        p = FactoryGirl.create(:task, title: "Initial Value")
+	        patch :update, id: p.id, task: {title: "New Value"}
+	        expect(response).to redirect_to root_path
+	        p.reload
+	        expect(p.title).to eq "New Value"
+	    end
+
+	    it "should have http 404 error if the task cannot be found" do
+			patch :update, id:"whatever", task: {title: "New Title"}
+			expect(response).to have_http_status(:not_found)
+	    end
+
+	    it "should render the edit form with an http status of unprocessable_entity" do
+	    	p = FactoryGirl.create(:task, title: "Initial Value")
+	    	patch :update, id: p.id, task: {title: ''}
+
+	    	expect(response).to have_http_status(:unprocessable_entity)
+	    	p.reload
+	    	expect(p.title).to eq "Initial Value"
+	    end
+    end
 
 end
+
+
+
+
+
+
+
+
