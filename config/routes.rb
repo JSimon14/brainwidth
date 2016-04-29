@@ -1,6 +1,7 @@
 Brainwidth::Application.routes.draw do
   devise_for :users
   root "tasks#index"
-  resources :tasks
-
+  resources :categories do
+    resources :tasks
+  end
 end

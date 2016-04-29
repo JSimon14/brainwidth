@@ -5,7 +5,7 @@
   <%= f.input :description %>
   <%= f.input :date, order: [:month, :day, :year] %>
   <%= f.input :value, collection: 1..10 %>
-  <%= f.input :category %>
+  <%= f.association :category %>
   <%= f.button :submit %>
 <% end %>
 

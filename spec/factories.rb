@@ -1,4 +1,8 @@
 FactoryGirl.define do
+  factory :category do
+    name 'school'
+  end
+
   factory :user do
     sequence :email do |n|
       "fakeEmail#{n}@yahoo.com"
@@ -12,8 +16,8 @@ FactoryGirl.define do
     title 'hello'
     date 'April 27 2016' 
     value '2' 
-    category 'work'
     association :user
   end
+
 
 end
