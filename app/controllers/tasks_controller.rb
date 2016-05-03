@@ -2,7 +2,8 @@ class TasksController < ApplicationController
 	before_action :authenticate_user!, only: [:new, :create, :show, :edit, :update, :destroy]
 
 	def index
-
+		@categories = Category.all
+		@tasks = Task.all
 	end
 
 	def new
