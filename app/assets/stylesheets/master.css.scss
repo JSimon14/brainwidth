@@ -1,9 +1,14 @@
+@import url(https://fonts.googleapis.com/css?family=Inconsolata:400,700);
+@import url(https://fonts.googleapis.com/css?family=Dosis:400,700);
+
+
+
 body{
-	background-color: #87B7ED;
+	background-color: #C1BDC7;
 }
 
 .top-nav {
-  background-color:#4E09B5;
+  background-color:#48474A;
   border-bottom-color: #0A0117;
   border-bottom-width: 1px;
   border-bottom-style: solid;
@@ -11,9 +16,10 @@ body{
 }
 
 .brand a {
-  color: #C4B4DB;
+  color: #7B3ED6;
   font-size: 50px;
   text-align: left;
+  font-family: 'Dosis', sans-serif, bold;
 }
 
 
@@ -22,6 +28,7 @@ body{
   color: #9578BF;
   font-size: 16px;
   text-align: right;
+  font-family: 'Inconsolata';
 }
 
 .top-nav .add {
@@ -43,8 +50,8 @@ body{
   font-size: 16px;
   text-align: left;
   vertical-align: center;
+  font-family: 'Inconsolata';
 }
-
 
 
 

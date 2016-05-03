@@ -13,9 +13,11 @@
         <%= link_to 'BrainWidth', root_path%>
       </div>
       <div class="new_items pull-left">
-      	<%= link_to "New Task", new_task_path %>
-      	<br/>   
-        <%= link_to "New Category", new_category_path %>
+      	<% if current_user %>
+	      	<%= link_to "New Task", new_task_path %>
+	      	<br/>   
+	        <%= link_to "New Category", new_category_path %>
+        <% end %>
       </div>
       <div class="add pull-right">
         <% if current_user %>
