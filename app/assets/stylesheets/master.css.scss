@@ -1,13 +1,17 @@
+body{
+	background-color: #87B7ED;
+}
+
 .top-nav {
-  background-color:white;
-  border-bottom-color: #edeeee;
+  background-color:#4E09B5;
+  border-bottom-color: #0A0117;
   border-bottom-width: 1px;
   border-bottom-style: solid;
   height: 70px;
 }
 
 .brand a {
-  color: #125688;
+  color: #C4B4DB;
   font-size: 50px;
   text-align: left;
 }
@@ -15,7 +19,7 @@
 
 .top-nav .add a {
   font-weight: bold;
-  color: #125688;
+  color: #9578BF;
   font-size: 16px;
   text-align: right;
 }
@@ -24,6 +28,7 @@
   margin-top:15px;
   margin-right: 25px;
   text-align: right;
+  color: #9578BF;
 }
 
 .top-nav .new_items {
@@ -34,7 +39,7 @@
 
 .top-nav .new_items a {
   font-weight: bold;
-  color: #125688;
+  color: #9578BF;
   font-size: 16px;
   text-align: left;
   vertical-align: center;
