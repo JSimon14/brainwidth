@@ -75,16 +75,14 @@
 	        </tr>
 	    </thead>
 	    <tbody>  
-	    	<% Category.all.each do |cat| %>
+	    	<% current_user.categories.each do |cat| %>
 	    		<tr>
-	    			<%if cat.user == current_user %>
-		    			<td class="category_name">
-		    				<%= cat.name %>
-		    			</td>
-		    		<% end %>	
+	    			<td class="category_name">
+	    				<%= cat.name %>
+	    			</td>
 	    			<td>
-	    				<% Task.all.each do |tsk| %>
-	    					<% if tsk.date == sunday && tsk.user == current_user && tsk.category == cat %>
+	    				<% current_user.tasks.each do |tsk| %>
+	    					<% if tsk.date == sunday && tsk.category_id == cat.id %>
 	    						<%= tsk.title %>
 	    						<br/>
 	    						<%= tsk.value %>
@@ -92,8 +90,8 @@
 						<%end%>
 	    			</td>
 	    			<td>
-	    				<% Task.all.each do |tsk| %>
-	    					<% if tsk.date == monday && tsk.user == current_user && tsk.category == cat %>
+	    				<% current_user.tasks.each do |tsk| %>
+	    					<% if tsk.date == monday && tsk.category_id == cat.id %>
 	    						<%= tsk.title %>
 	    						<br/>
 	    						<%= tsk.value %>
@@ -101,8 +99,8 @@
 						<%end%>
 	    			</td>
 	    			<td>
-	    				<% Task.all.each do |tsk| %>
-	    					<% if tsk.date == tuesday && tsk.user == current_user && tsk.category_id == cat.id %>
+	    				<% current_user.tasks.each do |tsk| %>
+	    					<% if tsk.date == tuesday && tsk.category_id == cat.id %>
 	    						<%= tsk.title %>
 	    						<br/>
 	    						<%= tsk.value %>
@@ -110,16 +108,16 @@
 						<%end%>
 	    			</td>
 	    			<td>
-	    				<% Task.all.each do |tsk| %>
-	    					<% if tsk.date == wednesday && tsk.user == current_user && tsk.category == cat %>
+	    				<% current_user.tasks.each do |tsk| %>
+	    					<% if tsk.date == wednesday && tsk.category_id == cat.id %>
 	    						<%= tsk.title %>
 	    						<br/>
     						<%= tsk.value %><%end%>	
 						<%end%>
 	    			</td>
 	    			<td>
-	    				<% Task.all.each do |tsk| %>
-	    					<% if tsk.date == thursday && tsk.user == current_user && tsk.category == cat %>
+	    				<% current_user.tasks.each do |tsk| %>
+	    					<% if tsk.date == thursday && tsk.category_id == cat.id %>
 	    						<%= tsk.title %>
 	    						<br/>
 	    						<%= tsk.value %>
@@ -127,8 +125,8 @@
 						<%end%>
 	    			</td>
 	    			<td>
-	    				<% Task.all.each do |tsk| %>
-	    					<% if tsk.date == friday && tsk.user == current_user && tsk.category == cat %>
+	    				<% current_user.tasks.each do |tsk| %>
+	    					<% if tsk.date == friday && tsk.category_id == cat.id %>
 	    						<%= tsk.title %>
 	    						<br/>
 	    						<%= tsk.value %>
@@ -136,8 +134,8 @@
 						<%end%>
 	    			</td>
 	    			<td>
-	    				<% Task.all.each do |tsk| %>
-	    					<% if tsk.date == saturday && tsk.user == current_user && tsk.category == cat %>
+	    				<% current_user.tasks.each do |tsk| %>
+	    					<% if tsk.date == saturday && tsk.category_id == cat.id %>
 	    						<%= tsk.title %>
 	    						<br/>
 	    						<%= tsk.value %>
