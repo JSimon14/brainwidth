@@ -1,34 +1,56 @@
 
 <% if current_user %>
 	<div class="table">
-	  <table class="table table-striped col-xs-10">
+	  <table class="table col-xs-10">
 	    <thead>
-	        <tr>
-	            <th>Category</th>
+	        <tr class="date_titles">
+	            <th class="category_title">Category</th>
 	            <th>
-	            	Sunday
+	            	<% date = Time.now %>
+	            	<% sunday = date.beginning_of_week(start_day = :sunday) %>
+	            	<%= sunday.strftime("%A") %>
+	            	<br/>
+	            	<%= sunday.strftime("%b %-d, %Y") %>
 	            </th>
 	            <th>
-	            	Monday
+	            	<% monday = sunday.advance(days: 1) %>
+	            	<%= monday.strftime("%A") %>
+	            	<br/>
+	            	<%= monday.strftime("%b %-d, %Y") %>
 	            </th>
 	            <th>
-	            	Tuesday
+	            	<% tuesday = monday.advance(days: 1) %>
+	            	<%= tuesday.strftime("%A") %>
+	            	<br/>
+	            	<%= tuesday.strftime("%b %-d, %Y") %>
 	            </th>
 	            <th>
-	            	Wednesday
+	            	<% wednesday = tuesday.advance(days: 1) %>
+	            	<%= wednesday.strftime("%A") %>
+	            	<br/>
+	            	<%= wednesday.strftime("%b %-d, %Y") %>
 	            </th>
 	            <th>
-	            	Thursday
+	            	<% thursday = wednesday.advance(days: 1) %>
+	            	<%= thursday.strftime("%A") %>
+	            	<br/>
+	            	<%= thursday.strftime("%b %-d, %Y") %>
 	            </th>
 	            <th>
-	            	Friday
+	            	<% friday = thursday.advance(days: 1) %>
+	            	<%= friday.strftime("%A") %>
+	            	<br/>
+	            	<%= friday.strftime("%b %-d, %Y") %>
 	            </th>
 	            <th>
-	            	Saturday
+	            	<% saturday = friday.advance(days: 1) %>
+	            	<%= saturday.strftime("%A") %>
+	            	<br/>
+	            	<%= saturday.strftime("%b %-d, %Y") %>
 	            </th>
 	        </tr>
-	        <tr>
-	            <th>Points</th>
+	        <tr class="points_sums">
+	            <th class="points_title">Points</th>
 	            <th>
 	            	sum
 	            </th>
@@ -53,7 +75,13 @@
 	        </tr>
 	    </thead>
 	    <tbody>  
-	    	
+	    	<% Category.all.each do |cat| %>
+	    		<tr>
+	    			<td class="category_name">
+	    				<%= cat.name %>
+	    			</td>
+	    		</tr>
+    		<%end%>	
 	    </tbody>
 	  </table>
 	</div>
