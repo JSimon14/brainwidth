@@ -102,7 +102,7 @@
 	    			</td>
 	    			<td>
 	    				<% Task.all.each do |tsk| %>
-	    					<% if tsk.date == tuesday && tsk.user == current_user && tsk.category == cat %>
+	    					<% if tsk.date == tuesday && tsk.user == current_user && tsk.category_id == cat.id %>
 	    						<%= tsk.title %>
 	    						<br/>
 	    						<%= tsk.value %>
