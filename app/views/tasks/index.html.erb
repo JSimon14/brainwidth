@@ -77,8 +77,72 @@
 	    <tbody>  
 	    	<% Category.all.each do |cat| %>
 	    		<tr>
-	    			<td class="category_name">
-	    				<%= cat.name %>
+	    			<%if cat.user == current_user %>
+		    			<td class="category_name">
+		    				<%= cat.name %>
+		    			</td>
+		    		<% end %>	
+	    			<td>
+	    				<% Task.all.each do |tsk| %>
+	    					<% if tsk.date == sunday && tsk.user == current_user && tsk.category == cat %>
+	    						<%= tsk.title %>
+	    						<br/>
+	    						<%= tsk.value %>
+    						<%end%>	
+						<%end%>
+	    			</td>
+	    			<td>
+	    				<% Task.all.each do |tsk| %>
+	    					<% if tsk.date == monday && tsk.user == current_user && tsk.category == cat %>
+	    						<%= tsk.title %>
+	    						<br/>
+	    						<%= tsk.value %>
+    						<%end%>	
+						<%end%>
+	    			</td>
+	    			<td>
+	    				<% Task.all.each do |tsk| %>
+	    					<% if tsk.date == tuesday && tsk.user == current_user && tsk.category == cat %>
+	    						<%= tsk.title %>
+	    						<br/>
+	    						<%= tsk.value %>
+    						<%end%>	
+						<%end%>
+	    			</td>
+	    			<td>
+	    				<% Task.all.each do |tsk| %>
+	    					<% if tsk.date == wednesday && tsk.user == current_user && tsk.category == cat %>
+	    						<%= tsk.title %>
+	    						<br/>
+    						<%= tsk.value %><%end%>	
+						<%end%>
+	    			</td>
+	    			<td>
+	    				<% Task.all.each do |tsk| %>
+	    					<% if tsk.date == thursday && tsk.user == current_user && tsk.category == cat %>
+	    						<%= tsk.title %>
+	    						<br/>
+	    						<%= tsk.value %>
+	    					<%end%>	
+						<%end%>
+	    			</td>
+	    			<td>
+	    				<% Task.all.each do |tsk| %>
+	    					<% if tsk.date == friday && tsk.user == current_user && tsk.category == cat %>
+	    						<%= tsk.title %>
+	    						<br/>
+	    						<%= tsk.value %>
+	    					<%end%>	
+						<%end%>
+	    			</td>
+	    			<td>
+	    				<% Task.all.each do |tsk| %>
+	    					<% if tsk.date == saturday && tsk.user == current_user && tsk.category == cat %>
+	    						<%= tsk.title %>
+	    						<br/>
+	    						<%= tsk.value %>
+    						<%end%>	
+						<%end%>	
 	    			</td>
 	    		</tr>
     		<%end%>	
