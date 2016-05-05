@@ -4,6 +4,8 @@ class TasksController < ApplicationController
 	def index
 		@categories = Category.find_by_id(params[:user_id])
 		@tasks = Task.find_by_id(params[:user_id])
+		@category = Category.new
+		@task = Task.new
 	end
 
 	def new

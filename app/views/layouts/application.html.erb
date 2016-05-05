@@ -14,9 +14,13 @@
       </div>
       <div class="new_items pull-left">
       	<% if current_user %>
-	      	<%= link_to "New Task", new_task_path %>
-	      	<br/>   
-	        <%= link_to "New Category", new_category_path %>
+	      <a type="button" role="button" data-toggle="modal" data-target="#newtaskModal">
+	      	New Task
+	      </a>
+          <br/> 
+          <a type="button" role="button" data-toggle="modal" data-target="#newcategoryModal">
+          	New Category
+		  </a>
         <% end %>
       </div>
       <div class="add pull-right">
@@ -38,30 +42,51 @@
   </div>
 
 <!-- Modal -->
-<div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="newtaskModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Sign In</h4>
+        <h4 class="modal-title" id="myModalLabel">New Task</h4>
       </div>
       <div class="modal-body">
-        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <div class="form-inputs">
-            <%= f.input :email, required: false, autofocus: true %>
-            <%= f.input :password, required: false %>
-          </div>
-	     </div>
-	     <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        <%= f.button :submit, "Log in" %>
-	     </div>
-	    <% end %>
+        <%= simple_form_for @task do |f| %>
+		  <%= f.input :title %>
+		  <%= f.input :description %>
+		  <%= f.input :date, order: [:month, :day, :year] %>
+		  <%= f.input :value, collection: 1..10 %>
+		  <%= f.association :category %>
+      </div>
+      <div class="modal-footer">
+      	  <%= f.button :submit %>
+		<% end %>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- Modal -->
+<div class="modal fade" id="newcategoryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">New Category</h4>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for @category do |f| %>
+		  <%= f.input :name %>
+		  <%= f.input :description %>
+      </div>
+      <div class="modal-footer">
+      	<%= f.button :submit %>
+		<% end %>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -84,6 +109,31 @@
 	      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	    </div>
       <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Sign In</h4>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="form-inputs">
+            <%= f.input :email, required: false, autofocus: true %>
+            <%= f.input :password, required: false %>
+          </div>
+	     </div>
+	     <div class="modal-footer">
+	     	<%= f.button :submit, "Log in" %>
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <br/>
+	        <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+	     </div>
+	    <% end %>
     </div>
   </div>
 </div>
