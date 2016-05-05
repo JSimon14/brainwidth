@@ -19,31 +19,31 @@
 	            	<%= monday.strftime("%b %-d, %Y") %>
 	            </th>
 	            <th>
-	            	<% tuesday = monday.advance(days: 1) %>
+	            	<% tuesday = sunday.advance(days: 2) %>
 	            	<%= tuesday.strftime("%A") %>
 	            	<br/>
 	            	<%= tuesday.strftime("%b %-d, %Y") %>
 	            </th>
 	            <th>
-	            	<% wednesday = tuesday.advance(days: 1) %>
+	            	<% wednesday = sunday.advance(days: 3) %>
 	            	<%= wednesday.strftime("%A") %>
 	            	<br/>
 	            	<%= wednesday.strftime("%b %-d, %Y") %>
 	            </th>
 	            <th>
-	            	<% thursday = wednesday.advance(days: 1) %>
+	            	<% thursday = sunday.advance(days: 4) %>
 	            	<%= thursday.strftime("%A") %>
 	            	<br/>
 	            	<%= thursday.strftime("%b %-d, %Y") %>
 	            </th>
 	            <th>
-	            	<% friday = thursday.advance(days: 1) %>
+	            	<% friday = sunday.advance(days: 5) %>
 	            	<%= friday.strftime("%A") %>
 	            	<br/>
 	            	<%= friday.strftime("%b %-d, %Y") %>
 	            </th>
 	            <th>
-	            	<% saturday = friday.advance(days: 1) %>
+	            	<% saturday = sunday.advance(days: 6) %>
 	            	<%= saturday.strftime("%A") %>
 	            	<br/>
 	            	<%= saturday.strftime("%b %-d, %Y") %>
@@ -52,25 +52,60 @@
 	        <tr class="points_sums">
 	            <th class="points_title">Points</th>
 	            <th>
-	            	sum
+	            	<% sum_sun = 0 %>
+	            	<% sun_tasks = current_user.tasks.where(date: sunday)%>
+	            	<% sun_tasks.each do |tsk|%>
+	            		<% sum_sun += tsk.value %>
+            		<% end %>
+            		<%= sum_sun %>
 	            </th>
 	            <th>
-	            	sum
+	            	<% sum_mon = 0 %>
+	            	<% mon_tasks = current_user.tasks.where(date: monday)%>
+	            	<% mon_tasks.each do |tsk|%>
+	            		<% sum_mon += tsk.value %>
+            		<% end %>
+            		<%= sum_mon %>
 	            </th>
 	            <th>
-	            	sum
+	            	<% sum_tues = 0 %>
+	            	<% tues_tasks = current_user.tasks.where(date: tuesday)%>
+	            	<% tues_tasks.each do |tsk|%>
+	            		<% sum_tues += tsk.value %>
+            		<% end %>
+            		<%= sum_tues %>
 	            </th>
 	            <th>
-	            	sum
+	            	<% sum_wed = 0 %>
+	            	<% wed_tasks = current_user.tasks.where(date: wednesday)%>
+	            	<% wed_tasks.each do |tsk|%>
+	            		<% sum_wed += tsk.value %>
+            		<% end %>
+            		<%= sum_wed %>
 	            </th>
 	            <th>
-	            	sum
+	            	<% sum_thur = 0 %>
+	            	<% thur_tasks = current_user.tasks.where(date: thursday)%>
+	            	<% thur_tasks.each do |tsk|%>
+	            		<% sum_thur += tsk.value %>
+            		<% end %>
+            		<%= sum_thur %>
 	            </th>
 	            <th>
-	            	sum
+	            	<% sum_fri = 0 %>
+	            	<% fri_tasks = current_user.tasks.where(date: friday)%>
+	            	<% fri_tasks.each do |tsk|%>
+	            		<% sum_fri += tsk.value %>
+            		<% end %>
+            		<%= sum_fri %>
 	            </th>
 	            <th>
-	            	sum
+	            	<% sum_sat = 0 %>
+	            	<% sat_tasks = current_user.tasks.where(date: saturday)%>
+	            	<% sat_tasks.each do |tsk|%>
+	            		<% sum_sat += tsk.value %>
+            		<% end %>
+            		<%= sum_sat %>
 	            </th>
 	        </tr>
 	    </thead>
@@ -80,7 +115,7 @@
 	    			<td class="category_name">
 	    				<%= cat.name %>
 	    			</td>
-	    			<td>
+	    			<td class="task_box">
 	    				<% current_user.tasks.each do |tsk| %>
 	    					<% if tsk.date == sunday && tsk.category_id == cat.id %>
 	    						<%= tsk.title %>
@@ -89,7 +124,7 @@
     						<%end%>	
 						<%end%>
 	    			</td>
-	    			<td>
+	    			<td class="task_box">
 	    				<% current_user.tasks.each do |tsk| %>
 	    					<% if tsk.date == monday && tsk.category_id == cat.id %>
 	    						<%= tsk.title %>
@@ -98,7 +133,7 @@
     						<%end%>	
 						<%end%>
 	    			</td>
-	    			<td>
+	    			<td class="task_box">
 	    				<% current_user.tasks.each do |tsk| %>
 	    					<% if tsk.date == tuesday && tsk.category_id == cat.id %>
 	    						<%= tsk.title %>
@@ -107,15 +142,16 @@
     						<%end%>	
 						<%end%>
 	    			</td>
-	    			<td>
+	    			<td class="task_box">
 	    				<% current_user.tasks.each do |tsk| %>
 	    					<% if tsk.date == wednesday && tsk.category_id == cat.id %>
 	    						<%= tsk.title %>
 	    						<br/>
-    						<%= tsk.value %><%end%>	
+	    						<%= tsk.value %>
+    						<%end%>	
 						<%end%>
 	    			</td>
-	    			<td>
+	    			<td class="task_box">
 	    				<% current_user.tasks.each do |tsk| %>
 	    					<% if tsk.date == thursday && tsk.category_id == cat.id %>
 	    						<%= tsk.title %>
@@ -124,7 +160,7 @@
 	    					<%end%>	
 						<%end%>
 	    			</td>
-	    			<td>
+	    			<td class="task_box">
 	    				<% current_user.tasks.each do |tsk| %>
 	    					<% if tsk.date == friday && tsk.category_id == cat.id %>
 	    						<%= tsk.title %>
@@ -133,7 +169,7 @@
 	    					<%end%>	
 						<%end%>
 	    			</td>
-	    			<td>
+	    			<td class="task_box">
 	    				<% current_user.tasks.each do |tsk| %>
 	    					<% if tsk.date == saturday && tsk.category_id == cat.id %>
 	    						<%= tsk.title %>
