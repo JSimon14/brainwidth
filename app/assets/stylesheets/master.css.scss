@@ -7,6 +7,10 @@ body{
 	background-color: #C1BDC7;
 }
 
+th{
+	text-align: center;
+}
+
 .top-nav {
   background-color:#48474A;
   border-bottom-color: #0A0117;
@@ -81,9 +85,60 @@ body{
 	font-family: 'Inconsolata';
 }
 
+.task_box {
+  -moz-box-shadow: 1px 1px 2px 2px #d0d0d0;
+  -webkit-box-shadow: 1px 1px 2px 2px #d0d0d0;
+  box-shadow: 1px 1px 2px 2px #d0d0d0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-color: #e4e4e4 #bebebd #bebebd #e4e4e4;
+  margin-top:10px;
+  margin-bottom:15px;
+  padding:20px;
+}
 
+.task_text {
+  -moz-box-shadow: 1px 1px 2px 0 #d0d0d0;
+  -webkit-box-shadow: 1px 1px 2px 0 #d0d0d0;
+  box-shadow: 1px 1px 2px 0 #d0d0d0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-color: #e4e4e4 #bebebd #bebebd #e4e4e4;
+  margin-top:3px;
+  margin-bottom:5px;
+  padding:5px;
+  text-align: center;
+  background-color: #9879C7;
+  font-family: 'Inconsolata'; 
+}
 
+.points_sums {
+	background-color: #86818C;
+	font-family: 'Inconsolata';
+	font-size: 15px;
+	text-align: center;
+}
 
+.category_name {
+	background-color: #C0A1ED;
+	text-align: center;
+	font-size: 20px;
+	color: #160233;
+	vertical-align: middle;
+	font-family: 'Inconsolata';
+}
+
+.date_titles {
+	font-family: 'Inconsolata';
+	font-size: 16px;
+	color: #160233;
+	vertical-align: middle;
+}
+
+.category_title {
+	font-size: 20px;
+	background-color: #C0A1ED;
+}
 
 
 
