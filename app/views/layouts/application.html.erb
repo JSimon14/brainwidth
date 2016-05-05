@@ -55,7 +55,12 @@
 		  <%= f.input :description %>
 		  <%= f.input :date, order: [:month, :day, :year] %>
 		  <%= f.input :value, collection: 1..10 %>
-		  <%= f.association :category %>
+		  <%= f.association :category, collection: (
+		  	if current_user 
+		  		current_user.categories
+	  		else 
+	  			Category.all
+	  		end) %>
       </div>
       <div class="modal-footer">
       	  <%= f.button :submit %>
