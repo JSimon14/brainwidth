@@ -11,4 +11,8 @@ class ApplicationController < ActionController::Base
   	render text: 'Forbidden', status: :forbidden
   end
 
+  def render_unprocessable(status=:unprocessable_entity)
+  	render text: 'Could Not Process your Request', status: :unprocessable_entity
+  end
+
 end

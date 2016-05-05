@@ -13,11 +13,13 @@ class TasksController < ApplicationController
 	end
 
 	def create
+		@category = Category.new
 		@task = current_user.tasks.create(task_params)
 		if @task.valid?
 			redirect_to root_path
 		else
-			return render :new, status: :unprocessable_entity
+			flash.now[:alert] = 'Unable to create task!'
+			return render :index, status: :unprocessable_entity
 		end
 	end
 

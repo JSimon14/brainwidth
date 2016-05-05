@@ -6,11 +6,13 @@ class CategoriesController < ApplicationController
 	end
 
 	def create
+		@task = Task.new
 		@category = current_user.categories.create(category_params)
 		if @category.valid?
 			redirect_to root_path
 		else
-			return render :new, status: :unprocessable_entity
+			flash.now[:alert] = 'Unable to create category!'
+			return render "tasks/index", status: :unprocessable_entity
 		end
 	end
 
