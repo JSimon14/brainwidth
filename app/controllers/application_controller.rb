@@ -15,4 +15,8 @@ class ApplicationController < ActionController::Base
   	render text: 'Could Not Process your Request', status: :unprocessable_entity
   end
 
+  @task = Task.new
+  @category = Category.new
+
+
 end
